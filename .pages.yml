@@ -30,6 +30,7 @@ content:
       - { name: giving_text, label: Other ways to give, type: text }
       - { name: video_url, label: Opening video URL, type: string }
       - { name: logo_image, label: Speed the Light logo, type: image }
+      - { name: nym_logo_image, label: AOG NYM logo, type: image }
       - { name: director_image, label: Director photo, type: image }
       - name: project_images
         label: Project photos
