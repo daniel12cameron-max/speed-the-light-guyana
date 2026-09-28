@@ -16,23 +16,88 @@ content:
       - { name: year, label: Year, type: string }
       - { name: kicker, label: Hero kicker, type: string }
       - { name: hero_text, label: Hero text, type: text }
+
       - { name: about_title, label: About heading, type: string }
       - { name: about_text, label: What is Speed the Light?, type: text }
+
       - { name: project_title, label: Project heading, type: string }
-      - { name: project_goal, label: Fundraising goal, type: string }
+      - { name: project_goal, label: Display fundraising goal, type: string }
       - { name: project_text, label: 2026 project description, type: text }
+      - name: fundraising_target
+        label: Fundraising target (GYD)
+        type: number
+        description: Used to calculate the campaign progress tank.
+        options:
+          min: 1
+      - name: amount_raised
+        label: Amount raised so far (GYD)
+        type: number
+        description: Update this whenever new funds are received.
+        options:
+          min: 0
+      - name: progress_updated
+        label: Progress last updated
+        type: string
+        description: Optional, for example "September 28, 2026".
+
       - { name: event_date, label: Speed the Light Day, type: string }
       - { name: event_text, label: Speed the Light Day description, type: text }
+
       - { name: director_name, label: Director name, type: string }
       - { name: director_bio, label: Director bio, type: text }
+
       - { name: mmg, label: MMG number, type: string }
       - { name: treasurer, label: NYM Treasurer, type: string }
       - { name: giving_text, label: Other ways to give, type: text }
+
       - { name: video_url, label: Opening video URL, type: string }
-      - { name: logo_image, label: Speed the Light logo, type: image }
-      - { name: nym_logo_image, label: AOG NYM logo, type: image }
-      - { name: director_image, label: Director photo, type: image }
+
+      - name: logo_image
+        label: Speed the Light logo
+        type: image
+        description: Logo shown beside Speed the Light 2026 in the navigation.
+        options:
+          categories: [image]
+          extensions: [png, jpg, jpeg, webp]
+          rename: safe
+
+      - name: nym_logo_image
+        label: AOG National Youth Ministries logo
+        type: image
+        description: Upload the AOG NYM logo shown in the top identity bar.
+        options:
+          categories: [image]
+          extensions: [png, jpg, jpeg, webp]
+          rename: safe
+
+      - name: director_image
+        label: Director photo
+        type: image
+        options:
+          categories: [image]
+          extensions: [png, jpg, jpeg, webp]
+          rename: safe
+
       - name: project_images
         label: Project photos
         type: image
-        list: true
+        options:
+          categories: [image]
+          extensions: [png, jpg, jpeg, webp]
+          multiple:
+            max: 12
+          unique: true
+          rename: safe
+
+      - name: whatsapp_channel_url
+        label: WhatsApp Channel link
+        type: string
+        description: Full WhatsApp Channel URL. Leave blank to hide the icon.
+      - name: facebook_url
+        label: Facebook link
+        type: string
+        description: Full Facebook page URL. Leave blank to hide the icon.
+      - name: instagram_url
+        label: Instagram link
+        type: string
+        description: Full Instagram profile URL. Leave blank to hide the icon.
