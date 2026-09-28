@@ -1,0 +1,37 @@
+media:
+  input: media
+  output: /media
+  rename: safe
+  categories: [image]
+
+content:
+  - name: site
+    label: Speed the Light 2026 Website
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: org, label: Organisation, type: string }
+      - { name: campaign, label: Campaign name, type: string }
+      - { name: year, label: Year, type: string }
+      - { name: kicker, label: Hero kicker, type: string }
+      - { name: hero_text, label: Hero text, type: text }
+      - { name: about_title, label: About heading, type: string }
+      - { name: about_text, label: What is Speed the Light?, type: text }
+      - { name: project_title, label: Project heading, type: string }
+      - { name: project_goal, label: Fundraising goal, type: string }
+      - { name: project_text, label: 2026 project description, type: text }
+      - { name: event_date, label: Speed the Light Day, type: string }
+      - { name: event_text, label: Speed the Light Day description, type: text }
+      - { name: director_name, label: Director name, type: string }
+      - { name: director_bio, label: Director bio, type: text }
+      - { name: mmg, label: MMG number, type: string }
+      - { name: treasurer, label: NYM Treasurer, type: string }
+      - { name: giving_text, label: Other ways to give, type: text }
+      - { name: video_url, label: Opening video URL, type: string }
+      - { name: logo_image, label: Speed the Light logo, type: image }
+      - { name: director_image, label: Director photo, type: image }
+      - name: project_images
+        label: Project photos
+        type: image
+        list: true
