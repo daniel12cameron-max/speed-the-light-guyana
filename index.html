@@ -22,148 +22,135 @@ body{
   background:#fff;
 }
 button{font:inherit}
+a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 
 /* AOG NYM identity bar */
-.top{
-  background:#12091b;
-  color:#fff;
-  padding:10px 0;
-}
-.top .wrap{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+.top{background:#12091b;color:#fff;padding:10px 0}
+.top .wrap{display:flex;align-items:center;gap:12px}
 .nymLogo{
-  width:44px;
-  height:44px;
-  border-radius:12px;
-  border:1px solid #ffffff30;
-  background:#ffffff12;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  flex:0 0 auto;
+  width:44px;height:44px;border-radius:12px;border:1px solid #ffffff30;
+  background:#ffffff12;display:grid;place-items:center;overflow:hidden;flex:0 0 auto
 }
-.nymLogo img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
+.nymLogo img{width:100%;height:100%;object-fit:contain}
 .nymPlaceholder{
-  font-size:.56rem;
-  font-weight:900;
-  line-height:1.05;
-  text-align:center;
-  color:#fff;
-  padding:4px;
+  font-size:.56rem;font-weight:900;line-height:1.05;text-align:center;color:#fff;padding:4px
 }
-#org{
-  font-size:.98rem;
-  line-height:1.25;
-}
+#org{font-size:.98rem;line-height:1.25}
 
 /* Main navigation */
 .nav{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #ececf3;
+  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid #ececf3
 }
 .nav .wrap{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
+  min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px
 }
-.navBrand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-width:0;
-}
+.navBrand{display:flex;align-items:center;gap:11px;min-width:0}
 .navStlLogo{
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  background:#050506;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  flex:0 0 auto;
+  width:40px;height:40px;border-radius:10px;background:#050506;
+  display:grid;place-items:center;overflow:hidden;flex:0 0 auto
 }
-.navStlLogo img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
-.navStlPlaceholder{
-  color:#fff;
-  font-weight:1000;
-  font-size:.72rem;
-}
-.navTitle{
-  font-weight:1000;
-  letter-spacing:-.02em;
-  white-space:nowrap;
-}
+.navStlLogo img{width:100%;height:100%;object-fit:contain}
+.navStlPlaceholder{color:#fff;font-weight:1000;font-size:.72rem}
+.navTitle{font-weight:1000;letter-spacing:-.02em;white-space:nowrap}
 .btn{
-  border:0;
-  border-radius:999px;
-  padding:13px 20px;
-  background:var(--gold);
-  color:#151515;
-  font-weight:900;
-  cursor:pointer;
-  transition:transform .18s ease,box-shadow .18s ease;
+  border:0;border-radius:999px;padding:13px 20px;background:var(--gold);color:#151515;
+  font-weight:900;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease
 }
 .btn:hover{transform:translateY(-1px)}
-.btn:focus-visible{outline:3px solid #ffffff;outline-offset:3px}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
-/* Hero */
-.hero{
-  color:#fff;
-  background:
-    radial-gradient(circle at 82% 18%,rgba(24,200,255,.35),transparent 30%),
-    radial-gradient(circle at 12% 92%,rgba(107,25,176,.5),transparent 28%),
-    linear-gradient(135deg,#190526,#3a1069 48%,#073dac);
-  padding:92px 0 96px;
+/* Campaign-poster hero */
+.heroPoster{
+  position:relative;
+  min-height:720px;
   overflow:hidden;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 18% 82%,rgba(18,120,38,.38),transparent 31%),
+    radial-gradient(circle at 78% 20%,rgba(24,200,255,.28),transparent 30%),
+    linear-gradient(135deg,#170326 0%,#3b106d 46%,#063ead 100%);
 }
-.heroContent{
-  max-width:1000px;
+.heroScene{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity:0;
+  transition:opacity .35s ease;
 }
-.kicker{
-  font-size:.84rem;
+.heroPoster.hasImage .heroScene{opacity:1}
+.heroFlag{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  opacity:.33;
+  background:
+    linear-gradient(155deg,transparent 0 54%,rgba(0,148,74,.48) 54% 70%,transparent 70%),
+    linear-gradient(25deg,transparent 0 58%,rgba(255,209,0,.34) 58% 66%,transparent 66%),
+    linear-gradient(5deg,transparent 0 65%,rgba(206,17,38,.25) 65% 69%,transparent 69%);
+}
+.heroOverlay{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(to bottom,rgba(7,4,20,.28),rgba(8,4,24,.56)),
+    radial-gradient(circle at center,rgba(0,0,0,.02),rgba(0,0,0,.22));
+}
+.heroPosterInner{
+  width:100%;
+  text-align:center;
+  padding:86px 0 80px;
+}
+.heroTopLine{
+  max-width:760px;
+  margin:0 auto 26px;
+  font-size:.86rem;
   font-weight:900;
-  letter-spacing:.09em;
+  letter-spacing:.11em;
   text-transform:uppercase;
 }
-.hero h1{
-  font-size:clamp(4rem,9vw,7.6rem);
-  line-height:.86;
-  letter-spacing:-.07em;
-  margin:22px 0 8px;
+.heroBigTitle{
+  margin:0 auto;
   max-width:1050px;
-}
-.projectLine{
-  color:var(--gold);
-  font-size:clamp(2rem,4.8vw,3.8rem);
-  line-height:1;
-  letter-spacing:-.055em;
+  font-size:clamp(4.4rem,11vw,8.8rem);
+  line-height:.83;
   font-weight:1000;
-  margin:0 0 24px;
+  letter-spacing:-.08em;
+  text-transform:uppercase;
+  text-shadow:0 12px 36px rgba(0,0,0,.34);
 }
-.hero p{
+.heroSubTitle{
+  margin:12px 0 0;
+  color:var(--gold);
+  font-size:clamp(2.1rem,5vw,3.8rem);
+  line-height:.98;
+  font-weight:1000;
+  letter-spacing:-.055em;
+}
+.heroCenterBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:30px auto 22px;
+  padding:15px 28px;
+  font-size:1rem;
+}
+.heroPosterText{
   max-width:760px;
-  margin:0 0 26px;
-  color:#eee9ff;
-  font-size:1.12rem;
+  margin:0 auto;
+  color:#f1edff;
+  font-size:1.08rem;
   line-height:1.68;
+  text-shadow:0 4px 18px rgba(0,0,0,.26);
 }
 
 /* Shared sections */
@@ -173,328 +160,182 @@ h2{
   font-size:clamp(2rem,4vw,3.6rem);
   letter-spacing:-.04em;
   line-height:1;
-  margin-top:0;
+  margin-top:0
 }
-.lead{
-  font-size:1.08rem;
-  line-height:1.68;
-  color:#555c70;
-}
-#aboutText,#directorBio{white-space:pre-line}
+.lead{font-size:1.08rem;line-height:1.68;color:#555c70}
 .grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:42px;
-  align-items:center;
+  display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center
 }
 .card{
-  background:#fff;
-  border:1px solid #e7e9f0;
-  border-radius:24px;
-  padding:28px;
+  background:#fff;border:1px solid #e7e9f0;border-radius:24px;padding:28px
 }
+
+/* Read more */
+.readBlock{margin-top:8px}
+.readPreview,.readFull{
+  font-size:1.08rem;
+  line-height:1.72;
+  color:#555c70;
+  white-space:pre-line
+}
+.readFull{display:none;margin-top:1.1em}
+.readBlock.expanded .readFull{display:block}
+.readToggle{
+  margin-top:16px;
+  border:1px solid #d9d1f2;
+  background:#eee9ff;
+  color:#32105f;
+  font-weight:900;
+  padding:11px 18px;
+  border-radius:999px;
+  cursor:pointer
+}
+.readToggle:hover{background:#e3dbff}
+
+/* Project + goal */
 .goal{
   background:linear-gradient(135deg,#27084a,#5c19b0);
-  color:#fff;
+  color:#fff
 }
+.goal h2{margin-bottom:18px}
 .goal strong{
   font-size:clamp(2.5rem,5.8vw,4.8rem);
   color:var(--gold);
   display:block;
   line-height:1;
-  margin:12px 0 18px;
+  margin:12px 0 18px
 }
 .goal p{line-height:1.62;color:#eee8ff}
 .progressCard{
-  margin-top:26px;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.16);
+  margin-top:26px;padding:20px;border-radius:20px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16)
 }
 .progressTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:16px;
-  margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:14px
 }
 .progressLabel{
-  display:block;
-  font-size:.72rem;
-  font-weight:900;
-  letter-spacing:.1em;
-  color:#d9cef2;
-  margin-bottom:6px;
+  display:block;font-size:.72rem;font-weight:900;letter-spacing:.1em;color:#d9cef2;margin-bottom:6px
 }
-.progressAmount{
-  font-size:1.35rem;
-  font-weight:1000;
-  color:#fff;
-}
-.progressPercent{
-  font-size:2rem;
-  line-height:1;
-  font-weight:1000;
-  color:var(--gold);
-}
+.progressAmount{font-size:1.35rem;font-weight:1000;color:#fff}
+.progressPercent{font-size:2rem;line-height:1;font-weight:1000;color:var(--gold)}
 .goalTank{
-  height:26px;
-  width:100%;
-  border:2px solid rgba(255,255,255,.5);
-  border-radius:999px;
-  padding:3px;
-  background:rgba(4,4,10,.35);
-  overflow:hidden;
+  height:26px;width:100%;border:2px solid rgba(255,255,255,.5);border-radius:999px;
+  padding:3px;background:rgba(4,4,10,.35);overflow:hidden
 }
 .goalFill{
-  width:0%;
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(90deg,#ffd83d,#ff9d34);
-  transition:width .55s ease;
+  width:0%;height:100%;border-radius:999px;
+  background:linear-gradient(90deg,#ffd83d,#ff9d34);transition:width .55s ease
 }
 .progressMeta{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  margin-top:10px;
-  color:#eee8ff;
-  font-size:.82rem;
+  display:flex;justify-content:space-between;gap:14px;margin-top:10px;color:#eee8ff;font-size:.82rem
 }
-.progressUpdated{
-  margin-top:8px;
-  color:#cabee8;
-  font-size:.78rem;
-}
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
+.progressUpdated{margin-top:8px;color:#cabee8;font-size:.78rem}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .ph{
-  aspect-ratio:4/3;
-  background:#e9eaff;
-  border-radius:18px;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  text-align:center;
-  padding:10px;
+  aspect-ratio:4/3;background:#e9eaff;border-radius:18px;display:grid;place-items:center;
+  overflow:hidden;text-align:center;padding:10px
 }
-.ph img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.day{
-  background:#0b0d17;
-  color:#fff;
-}
+.ph img{width:100%;height:100%;object-fit:cover}
+
+/* Event */
+.day{background:#0b0d17;color:#fff}
 .day .lead{color:#c8cad8}
 .date{
-  font-size:clamp(2.8rem,7vw,6rem);
-  font-weight:1000;
-  line-height:.92;
-  color:var(--gold);
-  letter-spacing:-.06em;
-}
-.number{
-  font-size:clamp(2.25rem,5vw,4.2rem);
-  font-weight:1000;
-  color:var(--purple);
-  letter-spacing:-.055em;
-  line-height:1;
-  overflow-wrap:anywhere;
-}
-.footer{
-  background:#12091b;
-  color:#fff;
-  padding:34px 0;
-}
-.footerInner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-}
-.socialWrap{
-  display:none;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.socialLabel{
-  font-size:.8rem;
-  font-weight:800;
-  color:#cfc6df;
-  margin-right:2px;
-}
-.socialIcon{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:#fff;
-  border:1px solid #ffffff2b;
-  background:#ffffff10;
-  transition:transform .18s ease,background .18s ease;
-}
-.socialIcon:hover{
-  transform:translateY(-2px);
-  background:#ffffff1c;
-}
-.socialIcon svg{
-  width:21px;
-  height:21px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-.socialIcon.facebook svg{
-  fill:currentColor;
-  stroke:none;
-}
-.video{
-  aspect-ratio:16/9;
-  background:#17131e;
-  border-radius:24px;
-  color:#fff;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  overflow:hidden;
-  margin-top:24px;
-}
-.video iframe{
-  width:100%;
-  height:100%;
-  border:0;
+  font-size:clamp(2.8rem,7vw,6rem);font-weight:1000;line-height:.92;
+  color:var(--gold);letter-spacing:-.06em
 }
 
-/* Tablet / mobile */
+/* Giving */
+.number{
+  font-size:clamp(2.25rem,5vw,4.2rem);
+  font-weight:1000;color:var(--purple);letter-spacing:-.055em;line-height:1;overflow-wrap:anywhere
+}
+
+/* Footer + social */
+.footer{background:#12091b;color:#fff;padding:34px 0}
+.footerInner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.socialWrap{display:none;align-items:center;gap:10px;flex-wrap:wrap}
+.socialLabel{font-size:.8rem;font-weight:800;color:#cfc6df;margin-right:2px}
+.socialIcon{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  border:1px solid #ffffff2b;background:#ffffff10;transition:transform .18s ease,background .18s ease
+}
+.socialIcon:hover{transform:translateY(-2px);background:#ffffff1c}
+.socialIcon svg{
+  width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round
+}
+.socialIcon.facebook svg{fill:currentColor;stroke:none}
+
+/* Video */
+.video{
+  aspect-ratio:16/9;background:#17131e;border-radius:24px;color:#fff;display:grid;
+  place-items:center;text-align:center;overflow:hidden;margin-top:24px
+}
+.video iframe{width:100%;height:100%;border:0}
+
+/* Tablet/mobile */
 @media(max-width:850px){
   .wrap{width:min(100% - 28px,var(--max))}
   .top{padding:8px 0}
-  .nymLogo{
-    width:38px;
-    height:38px;
-    border-radius:10px;
+  .nymLogo{width:38px;height:38px;border-radius:10px}
+  #org{font-size:.82rem;line-height:1.25}
+  .nav .wrap{min-height:62px;gap:10px}
+  .navStlLogo{width:34px;height:34px;border-radius:9px}
+  .navTitle{font-size:.9rem}
+  .nav .btn{padding:10px 14px;font-size:.82rem}
+
+  .heroPoster{min-height:620px}
+  .heroPosterInner{padding:62px 0 58px}
+  .heroTopLine{
+    font-size:.74rem;
+    line-height:1.45;
+    margin-bottom:18px;
+    max-width:95%
   }
-  #org{
-    font-size:.82rem;
-    line-height:1.25;
+  .heroBigTitle{
+    font-size:clamp(3.5rem,16vw,5.6rem);
+    line-height:.86
   }
-  .nav .wrap{
-    min-height:62px;
-    gap:10px;
+  .heroSubTitle{
+    font-size:clamp(1.8rem,8.7vw,2.9rem);
+    margin-top:10px
   }
-  .navStlLogo{
-    width:34px;
-    height:34px;
-    border-radius:9px;
-  }
-  .navTitle{
-    font-size:.9rem;
-  }
-  .nav .btn{
-    padding:10px 14px;
-    font-size:.82rem;
-  }
-  .hero{
-    padding:58px 0 62px;
-  }
-  .hero h1{
-    font-size:clamp(3.15rem,15vw,5.25rem);
-    line-height:.88;
-    margin:16px 0 10px;
-  }
-  .projectLine{
-    font-size:clamp(1.75rem,8.5vw,2.8rem);
-    margin-bottom:20px;
-  }
-  .hero p{
-    font-size:1rem;
-    line-height:1.62;
-    margin-bottom:22px;
-  }
-  .grid2{
-    grid-template-columns:1fr;
-    gap:28px;
-  }
-  .section{
-    padding:58px 0;
-  }
-  .card{
-    padding:22px;
-    border-radius:20px;
-  }
-  .gallery{
-    grid-template-columns:1fr 1fr;
-  }
-  .date{
-    font-size:clamp(2.65rem,13vw,4.4rem);
-  }
-  .number{
-    font-size:clamp(1.9rem,9.5vw,3rem);
-    letter-spacing:-.045em;
-  }
-  .lead{
-    font-size:1rem;
-    line-height:1.62;
-  }
+  .heroCenterBtn{margin:24px auto 20px;padding:13px 22px}
+  .heroPosterText{font-size:1rem;line-height:1.6;max-width:100%}
+
+  .grid2{grid-template-columns:1fr;gap:28px}
+  .section{padding:58px 0}
+  .card{padding:22px;border-radius:20px}
+  .gallery{grid-template-columns:1fr 1fr}
+  .date{font-size:clamp(2.65rem,13vw,4.4rem)}
+  .number{font-size:clamp(1.9rem,9.5vw,3rem);letter-spacing:-.045em}
+  .lead,.readPreview,.readFull{font-size:1rem;line-height:1.62}
   .video{border-radius:18px}
-  .footerInner{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-  .progressTop{
-    align-items:flex-start;
-  }
-  .progressAmount{
-    font-size:1.12rem;
-  }
-  .progressPercent{
-    font-size:1.65rem;
-  }
+  .footerInner{align-items:flex-start;flex-direction:column}
+  .progressTop{align-items:flex-start}
+  .progressAmount{font-size:1.12rem}
+  .progressPercent{font-size:1.65rem}
 }
 
 @media(max-width:520px){
   .wrap{width:calc(100% - 24px)}
-  .navTitle{
-    max-width:145px;
-    white-space:normal;
-    line-height:1.02;
+  .navTitle{max-width:145px;white-space:normal;line-height:1.02}
+  .heroPoster{min-height:590px}
+  .heroPosterInner{padding:52px 0 50px}
+  .heroBigTitle{font-size:clamp(3.25rem,17vw,4.75rem)}
+  .heroSubTitle{font-size:clamp(1.7rem,8.5vw,2.45rem)}
+  .heroPosterText{
+    font-size:.98rem;
+    line-height:1.58;
+    max-width:94%
   }
-  .hero{
-    padding:48px 0 52px;
-  }
-  .hero h1{
-    font-size:clamp(3rem,18vw,4.5rem);
-  }
-  .kicker{
-    font-size:.72rem;
-    line-height:1.4;
-  }
-  .gallery{
-    grid-template-columns:1fr;
-  }
-  .number{
-    font-size:clamp(1.75rem,10vw,2.6rem);
-  }
-  h2{
-    font-size:clamp(1.9rem,10vw,2.7rem);
-  }
-  .progressCard{
-    padding:16px;
-  }
-  .progressMeta{
-    flex-direction:column;
-    gap:4px;
-  }
+  .heroCenterBtn{width:min(100%,310px)}
+  .gallery{grid-template-columns:1fr}
+  .number{font-size:clamp(1.75rem,10vw,2.6rem)}
+  h2{font-size:clamp(1.9rem,10vw,2.7rem)}
+  .progressCard{padding:16px}
+  .progressMeta{flex-direction:column;gap:4px}
 }
 </style>
 </head>
@@ -521,22 +362,35 @@ h2{
   </div>
 </div>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="heroContent">
-      <div class="kicker" id="kicker"></div>
-      <h1>SPEED THE LIGHT</h1>
-      <div class="projectLine"><span id="heroYear"></span> PROJECT</div>
-      <p id="heroText"></p>
-      <button class="btn" onclick="document.getElementById('give').scrollIntoView()">Support the Project</button>
-    </div>
+<header class="heroPoster" id="heroPoster">
+  <div class="heroScene" id="heroScene"></div>
+  <div class="heroFlag"></div>
+  <div class="heroOverlay"></div>
+
+  <div class="wrap heroPosterInner">
+    <div class="heroTopLine" id="kicker"></div>
+
+    <div class="heroBigTitle">SPEED THE LIGHT</div>
+    <div class="heroSubTitle"><span id="heroYear"></span> PROJECT</div>
+
+    <button class="btn heroCenterBtn" onclick="document.getElementById('give').scrollIntoView()">
+      Support the Project
+    </button>
+
+    <p id="heroText" class="heroPosterText"></p>
   </div>
 </header>
 
 <section class="section">
   <div class="wrap">
     <h2 id="aboutTitle"></h2>
-    <p class="lead" id="aboutText"></p>
+
+    <div class="readBlock" id="aboutReadBlock">
+      <div class="readPreview" id="aboutPreview"></div>
+      <div class="readFull" id="aboutFull"></div>
+      <button class="readToggle" id="aboutToggle" type="button">Read more</button>
+    </div>
+
     <div class="video" id="videoBox">
       <div>
         <strong>Opening Video Placeholder</strong><br>
@@ -549,7 +403,7 @@ h2{
 <section class="section soft">
   <div class="wrap grid2">
     <div class="card goal">
-      <div class="kicker">OUR 2026 PROJECT</div>
+      <div class="heroTopLine" style="margin:0 0 14px;text-align:left">OUR 2026 PROJECT</div>
       <h2 id="projectTitle"></h2>
       <strong id="projectGoal"></strong>
       <p id="projectText"></p>
@@ -562,16 +416,20 @@ h2{
           </div>
           <div class="progressPercent" id="progressPercent">0%</div>
         </div>
+
         <div class="goalTank" id="goalTank" role="progressbar" aria-label="Speed the Light fundraising progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div class="goalFill" id="goalFill"></div>
         </div>
+
         <div class="progressMeta">
           <span>Raised so far</span>
           <span id="goalAmount">Goal: GYD 6,000,000</span>
         </div>
+
         <div class="progressUpdated" id="progressUpdated"></div>
       </div>
     </div>
+
     <div>
       <h2>Project Photos</h2>
       <div class="gallery" id="gallery">
@@ -599,10 +457,16 @@ h2{
 <section class="section">
   <div class="wrap grid2">
     <div class="ph" id="directorPhoto" style="aspect-ratio:4/5">Upload director photo in CMS</div>
+
     <div>
-      <div class="kicker" style="color:#32105f">MEET OUR NATIONAL YOUTH DIRECTOR</div>
+      <div class="heroTopLine" style="margin:0 0 14px;text-align:left;color:#32105f">MEET OUR NATIONAL YOUTH DIRECTOR</div>
       <h2 id="directorName"></h2>
-      <p class="lead" id="directorBio"></p>
+
+      <div class="readBlock" id="directorReadBlock">
+        <div class="readPreview" id="directorPreview"></div>
+        <div class="readFull" id="directorFull"></div>
+        <button class="readToggle" id="directorToggle" type="button">Read more</button>
+      </div>
     </div>
   </div>
 </section>
@@ -610,7 +474,7 @@ h2{
 <section class="section soft" id="give">
   <div class="wrap">
     <div class="card">
-      <div class="kicker" style="color:#32105f">WAYS TO GIVE</div>
+      <div class="heroTopLine" style="margin:0 0 14px;text-align:left;color:#32105f">WAYS TO GIVE</div>
       <h2>Support Speed the Light 2026</h2>
       <div class="number">MMG: <span id="mmg"></span></div>
       <p><strong id="treasurer"></strong></p>
@@ -654,28 +518,89 @@ h2{
 </footer>
 
 <script>
+const byId=id=>document.getElementById(id);
+
+function setupReadMore(blockId,previewId,fullId,toggleId,text){
+  const block=byId(blockId);
+  const preview=byId(previewId);
+  const full=byId(fullId);
+  const toggle=byId(toggleId);
+
+  const paragraphs=(text||'')
+    .split(/\n\s*\n/)
+    .map(x=>x.trim())
+    .filter(Boolean);
+
+  if(!paragraphs.length){
+    preview.textContent='';
+    full.textContent='';
+    toggle.style.display='none';
+    return;
+  }
+
+  preview.textContent=paragraphs[0];
+  const rest=paragraphs.slice(1).join('\n\n');
+
+  if(!rest){
+    full.textContent='';
+    toggle.style.display='none';
+    return;
+  }
+
+  full.textContent=rest;
+  toggle.style.display='inline-flex';
+
+  toggle.addEventListener('click',()=>{
+    const expanded=block.classList.toggle('expanded');
+    toggle.textContent=expanded?'Read less':'Read more';
+    toggle.setAttribute('aria-expanded',String(expanded));
+  });
+}
+
+function normalizeVideoUrl(url){
+  if(!url) return '';
+  try{
+    if(url.includes('youtu.be/')){
+      const id=url.split('youtu.be/')[1].split(/[?&]/)[0];
+      return 'https://www.youtube.com/embed/'+id;
+    }
+    if(url.includes('youtube.com/watch')){
+      const parsed=new URL(url);
+      const id=parsed.searchParams.get('v');
+      return id?'https://www.youtube.com/embed/'+id:url;
+    }
+  }catch(e){}
+  return url;
+}
+
 async function load(){
   const d=await fetch('/content/site.json',{cache:'no-store'}).then(r=>r.json());
-  const s=(id,v)=>document.getElementById(id).textContent=v||'';
+  const set=(id,value)=>{ const node=byId(id); if(node) node.textContent=value||''; };
 
-  s('org',d.org);
-  s('footerOrg',d.org);
-  s('year',d.year);
-  s('heroYear',d.year);
-  s('kicker',d.kicker);
-  s('heroText',d.hero_text);
-  s('aboutTitle',d.about_title);
-  s('aboutText',d.about_text);
-  s('projectTitle',d.project_title);
-  s('projectGoal',d.project_goal);
-  s('projectText',d.project_text);
-  s('eventDate',d.event_date);
-  s('eventText',d.event_text);
-  s('directorName',d.director_name);
-  s('directorBio',d.director_bio);
-  s('mmg',d.mmg);
-  s('treasurer','NYM Treasurer — '+d.treasurer);
-  s('givingText',d.giving_text);
+  set('org',d.org);
+  set('footerOrg',d.org);
+  set('year',d.year);
+  set('heroYear',d.year);
+  set('kicker',d.kicker);
+  set('heroText',d.hero_text);
+  set('aboutTitle',d.about_title);
+  set('projectTitle',d.project_title);
+  set('projectGoal',d.project_goal);
+  set('projectText',d.project_text);
+  set('eventDate',d.event_date);
+  set('eventText',d.event_text);
+  set('directorName',d.director_name);
+  set('mmg',d.mmg);
+  set('treasurer','NYM Treasurer — '+d.treasurer);
+  set('givingText',d.giving_text);
+
+  setupReadMore('aboutReadBlock','aboutPreview','aboutFull','aboutToggle',d.about_text||'');
+  setupReadMore('directorReadBlock','directorPreview','directorFull','directorToggle',d.director_bio||'');
+
+  if(d.hero_image){
+    byId('heroScene').style.backgroundImage='url("'+d.hero_image.replace(/"/g,'')+'")';
+    byId('heroPoster').classList.add('hasImage');
+  }
 
   const target=Math.max(0,Number(d.fundraising_target)||0);
   const raised=Math.max(0,Number(d.amount_raised)||0);
@@ -684,54 +609,57 @@ async function load(){
   const fillPercent=Math.max(0,Math.min(100,rawPercent));
   const money=n=>'GYD '+Math.round(n).toLocaleString('en-US');
 
-  raisedAmount.textContent=money(raised)+' raised';
-  goalAmount.textContent='Goal: '+money(target);
-  progressPercent.textContent=displayPercent+'%';
-  goalFill.style.width=fillPercent+'%';
-  goalTank.setAttribute('aria-valuenow',String(Math.min(100,displayPercent)));
+  set('raisedAmount',money(raised)+' raised');
+  set('goalAmount','Goal: '+money(target));
+  set('progressPercent',displayPercent+'%');
+  byId('goalFill').style.width=fillPercent+'%';
+  byId('goalTank').setAttribute('aria-valuenow',String(Math.min(100,displayPercent)));
 
   if(d.progress_updated){
-    progressUpdated.textContent='Last updated: '+d.progress_updated;
+    set('progressUpdated','Last updated: '+d.progress_updated);
   }else{
-    progressUpdated.textContent='';
+    set('progressUpdated','');
   }
 
   const socialLinks=[
-    [whatsappLink,d.whatsapp_channel_url],
-    [facebookLink,d.facebook_url],
-    [instagramLink,d.instagram_url]
+    [byId('whatsappLink'),d.whatsapp_channel_url],
+    [byId('facebookLink'),d.facebook_url],
+    [byId('instagramLink'),d.instagram_url]
   ];
+
   let hasSocial=false;
-  socialLinks.forEach(([el,url])=>{
+  socialLinks.forEach(([node,url])=>{
     if(url){
-      el.href=url;
-      el.style.display='grid';
+      node.href=url;
+      node.style.display='grid';
       hasSocial=true;
     }else{
-      el.style.display='none';
+      node.style.display='none';
     }
   });
-  socialWrap.style.display=hasSocial?'flex':'none';
+  byId('socialWrap').style.display=hasSocial?'flex':'none';
 
   if(d.logo_image){
-    navStlLogo.innerHTML='<img src="'+d.logo_image+'" alt="Speed the Light logo">';
+    byId('navStlLogo').innerHTML='<img src="'+d.logo_image+'" alt="Speed the Light logo">';
   }
   if(d.nym_logo_image){
-    nymLogoBox.innerHTML='<img src="'+d.nym_logo_image+'" alt="AOG National Youth Ministries logo">';
+    byId('nymLogoBox').innerHTML='<img src="'+d.nym_logo_image+'" alt="AOG National Youth Ministries logo">';
   }
   if(d.director_image){
-    directorPhoto.innerHTML='<img src="'+d.director_image+'" alt="National Youth Director">';
+    byId('directorPhoto').innerHTML='<img src="'+d.director_image+'" alt="National Youth Director">';
   }
   if(d.project_images?.length){
-    gallery.innerHTML=d.project_images.map(x=>'<div class="ph"><img src="'+x+'" alt="Project"></div>').join('');
+    byId('gallery').innerHTML=d.project_images
+      .map(x=>'<div class="ph"><img src="'+x+'" alt="Speed the Light mission project"></div>')
+      .join('');
   }
   if(d.video_url){
-    let u=d.video_url.replace('watch?v=','embed/').replace('youtu.be/','youtube.com/embed/');
-    videoBox.innerHTML='<iframe src="'+u+'" allowfullscreen></iframe>';
+    const u=normalizeVideoUrl(d.video_url);
+    byId('videoBox').innerHTML='<iframe src="'+u+'" title="What is Speed the Light?" allowfullscreen></iframe>';
   }
 }
+
 load();
 </script>
-
 </body>
 </html>
