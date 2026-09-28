@@ -16,6 +16,14 @@ content:
       - { name: year, label: Year, type: string }
       - { name: kicker, label: Hero kicker, type: string }
       - { name: hero_text, label: Hero text, type: text }
+      - name: hero_image
+        label: Hero campaign image
+        type: image
+        description: Optional full-width campaign image behind the Speed the Light hero. Use a wide image with people centered.
+        options:
+          categories: [image]
+          extensions: [png, jpg, jpeg, webp]
+          rename: safe
 
       - { name: about_title, label: About heading, type: string }
       - { name: about_text, label: What is Speed the Light?, type: text }
