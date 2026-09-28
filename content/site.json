@@ -27,5 +27,11 @@
     "/media/whatsapp-image-2026-09-26-at-103705-1.jpeg",
     "/media/whatsapp-image-2026-09-26-at-103705.jpeg"
   ],
-  "nym_logo_image": ""
+  "nym_logo_image": "",
+  "fundraising_target": 6000000,
+  "amount_raised": 0,
+  "progress_updated": "",
+  "whatsapp_channel_url": "",
+  "facebook_url": "",
+  "instagram_url": ""
 }
