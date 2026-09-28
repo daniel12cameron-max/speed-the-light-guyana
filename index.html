@@ -205,6 +205,68 @@ h2{
   margin:12px 0 18px;
 }
 .goal p{line-height:1.62;color:#eee8ff}
+.progressCard{
+  margin-top:26px;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+}
+.progressTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-bottom:14px;
+}
+.progressLabel{
+  display:block;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  color:#d9cef2;
+  margin-bottom:6px;
+}
+.progressAmount{
+  font-size:1.35rem;
+  font-weight:1000;
+  color:#fff;
+}
+.progressPercent{
+  font-size:2rem;
+  line-height:1;
+  font-weight:1000;
+  color:var(--gold);
+}
+.goalTank{
+  height:26px;
+  width:100%;
+  border:2px solid rgba(255,255,255,.5);
+  border-radius:999px;
+  padding:3px;
+  background:rgba(4,4,10,.35);
+  overflow:hidden;
+}
+.goalFill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ffd83d,#ff9d34);
+  transition:width .55s ease;
+}
+.progressMeta{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:10px;
+  color:#eee8ff;
+  font-size:.82rem;
+}
+.progressUpdated{
+  margin-top:8px;
+  color:#cabee8;
+  font-size:.78rem;
+}
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -249,6 +311,52 @@ h2{
   background:#12091b;
   color:#fff;
   padding:34px 0;
+}
+.footerInner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.socialWrap{
+  display:none;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.socialLabel{
+  font-size:.8rem;
+  font-weight:800;
+  color:#cfc6df;
+  margin-right:2px;
+}
+.socialIcon{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  border:1px solid #ffffff2b;
+  background:#ffffff10;
+  transition:transform .18s ease,background .18s ease;
+}
+.socialIcon:hover{
+  transform:translateY(-2px);
+  background:#ffffff1c;
+}
+.socialIcon svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.socialIcon.facebook svg{
+  fill:currentColor;
+  stroke:none;
 }
 .video{
   aspect-ratio:16/9;
@@ -339,6 +447,19 @@ h2{
     line-height:1.62;
   }
   .video{border-radius:18px}
+  .footerInner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .progressTop{
+    align-items:flex-start;
+  }
+  .progressAmount{
+    font-size:1.12rem;
+  }
+  .progressPercent{
+    font-size:1.65rem;
+  }
 }
 
 @media(max-width:520px){
@@ -366,6 +487,13 @@ h2{
   }
   h2{
     font-size:clamp(1.9rem,10vw,2.7rem);
+  }
+  .progressCard{
+    padding:16px;
+  }
+  .progressMeta{
+    flex-direction:column;
+    gap:4px;
   }
 }
 </style>
@@ -425,6 +553,24 @@ h2{
       <h2 id="projectTitle"></h2>
       <strong id="projectGoal"></strong>
       <p id="projectText"></p>
+
+      <div class="progressCard">
+        <div class="progressTop">
+          <div>
+            <span class="progressLabel">CAMPAIGN PROGRESS</span>
+            <div class="progressAmount" id="raisedAmount">GYD 0 raised</div>
+          </div>
+          <div class="progressPercent" id="progressPercent">0%</div>
+        </div>
+        <div class="goalTank" id="goalTank" role="progressbar" aria-label="Speed the Light fundraising progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="goalFill" id="goalFill"></div>
+        </div>
+        <div class="progressMeta">
+          <span>Raised so far</span>
+          <span id="goalAmount">Goal: GYD 6,000,000</span>
+        </div>
+        <div class="progressUpdated" id="progressUpdated"></div>
+      </div>
     </div>
     <div>
       <h2>Project Photos</h2>
@@ -474,9 +620,36 @@ h2{
 </section>
 
 <footer class="footer">
-  <div class="wrap">
-    <strong id="footerOrg"></strong><br>
-    Speed the Light 2026 · Give. Go. Share.
+  <div class="wrap footerInner">
+    <div>
+      <strong id="footerOrg"></strong><br>
+      Speed the Light 2026 · Give. Go. Share.
+    </div>
+
+    <div class="socialWrap" id="socialWrap">
+      <span class="socialLabel">Follow NYM</span>
+
+      <a class="socialIcon" id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Channel" title="WhatsApp Channel">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.1A8 8 0 1 1 20 11.5Z"/>
+          <path d="M8.8 8.2c.2-.4.4-.4.7-.4h.4c.2 0 .4.1.5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.5.9 1.2 1.6 2 2.1.3.2.5.2.7 0l.8-.9c.2-.2.4-.3.7-.1l1.8.9c.3.1.4.3.4.5 0 .3-.2 1.3-.9 1.9-.6.5-1.4.8-2.5.5-1.2-.3-2.7-1-4.4-2.6-1.4-1.3-2.3-2.9-2.6-4-.3-1 .1-1.8.3-2.2Z"/>
+        </svg>
+      </a>
+
+      <a class="socialIcon facebook" id="facebookLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13.7 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8.2v3h2.6v8h2.9Z"/>
+        </svg>
+      </a>
+
+      <a class="socialIcon" id="instagramLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -503,6 +676,42 @@ async function load(){
   s('mmg',d.mmg);
   s('treasurer','NYM Treasurer — '+d.treasurer);
   s('givingText',d.giving_text);
+
+  const target=Math.max(0,Number(d.fundraising_target)||0);
+  const raised=Math.max(0,Number(d.amount_raised)||0);
+  const rawPercent=target>0?(raised/target)*100:0;
+  const displayPercent=Math.round(rawPercent);
+  const fillPercent=Math.max(0,Math.min(100,rawPercent));
+  const money=n=>'GYD '+Math.round(n).toLocaleString('en-US');
+
+  raisedAmount.textContent=money(raised)+' raised';
+  goalAmount.textContent='Goal: '+money(target);
+  progressPercent.textContent=displayPercent+'%';
+  goalFill.style.width=fillPercent+'%';
+  goalTank.setAttribute('aria-valuenow',String(Math.min(100,displayPercent)));
+
+  if(d.progress_updated){
+    progressUpdated.textContent='Last updated: '+d.progress_updated;
+  }else{
+    progressUpdated.textContent='';
+  }
+
+  const socialLinks=[
+    [whatsappLink,d.whatsapp_channel_url],
+    [facebookLink,d.facebook_url],
+    [instagramLink,d.instagram_url]
+  ];
+  let hasSocial=false;
+  socialLinks.forEach(([el,url])=>{
+    if(url){
+      el.href=url;
+      el.style.display='grid';
+      hasSocial=true;
+    }else{
+      el.style.display='none';
+    }
+  });
+  socialWrap.style.display=hasSocial?'flex':'none';
 
   if(d.logo_image){
     navStlLogo.innerHTML='<img src="'+d.logo_image+'" alt="Speed the Light logo">';
