@@ -276,6 +276,41 @@ h2{
 }
 .socialIcon.facebook svg{fill:currentColor;stroke:none}
 
+/* Background instrumental control */
+.musicControl{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:40;
+  display:none;
+  align-items:center;
+  gap:8px;
+  border:1px solid #ffffff35;
+  border-radius:999px;
+  padding:10px 14px;
+  background:rgba(18,9,27,.88);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+  cursor:pointer;
+  font-weight:850;
+  font-size:.82rem;
+}
+.musicControl:hover{background:rgba(18,9,27,.96)}
+.musicControl .musicGlyph{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--gold);
+  color:#151515;
+  font-size:.78rem;
+  flex:0 0 auto;
+}
+.musicControl.isPaused{opacity:.86}
+.musicControl:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
 /* Video */
 .video{
   aspect-ratio:16/9;background:#17131e;border-radius:24px;color:#fff;display:grid;
@@ -345,6 +380,12 @@ h2{
   h2{font-size:clamp(1.9rem,10vw,2.7rem)}
   .progressCard{padding:16px}
   .progressMeta{flex-direction:column;gap:4px}
+  .musicControl{
+    right:12px;
+    bottom:12px;
+    padding:9px 12px;
+    font-size:.76rem;
+  }
 }
 </style>
 </head>
@@ -492,6 +533,11 @@ h2{
   </div>
 </section>
 
+<button class="musicControl isPaused" id="musicControl" type="button" aria-label="Play background instrumental" aria-pressed="false">
+  <span class="musicGlyph" id="musicGlyph">♪</span>
+  <span id="musicLabel">Play music</span>
+</button>
+
 <footer class="footer">
   <div class="wrap footerInner">
     <div>
@@ -528,6 +574,12 @@ h2{
 
 <script>
 const byId=id=>document.getElementById(id);
+
+let backgroundAudio=null;
+let musicWanted=true;
+let videoIsPlaying=false;
+let youtubePlayer=null;
+let youtubeApiRequested=false;
 
 function setupReadMore(blockId,previewId,fullId,toggleId,text){
   const block=byId(blockId);
@@ -566,21 +618,114 @@ function setupReadMore(blockId,previewId,fullId,toggleId,text){
   });
 }
 
-function normalizeVideoUrl(url){
+function getYouTubeId(url){
   if(!url) return '';
   try{
     if(url.includes('youtu.be/')){
-      const id=url.split('youtu.be/')[1].split(/[?&]/)[0];
-      return 'https://www.youtube.com/embed/'+id;
+      return url.split('youtu.be/')[1].split(/[?&]/)[0];
     }
     if(url.includes('youtube.com/watch')){
-      const parsed=new URL(url);
-      const id=parsed.searchParams.get('v');
-      return id?'https://www.youtube.com/embed/'+id:url;
+      return new URL(url).searchParams.get('v')||'';
+    }
+    if(url.includes('youtube.com/embed/')){
+      return url.split('youtube.com/embed/')[1].split(/[?&]/)[0];
     }
   }catch(e){}
-  return url;
+  return '';
 }
+
+function updateMusicControl(){
+  const control=byId('musicControl');
+  if(!control || !backgroundAudio) return;
+  const playing=!backgroundAudio.paused && !videoIsPlaying;
+  control.classList.toggle('isPaused',!playing);
+  control.setAttribute('aria-pressed',String(playing));
+  control.setAttribute('aria-label',playing?'Pause background instrumental':'Play background instrumental');
+  byId('musicLabel').textContent=playing?'Music on':'Play music';
+  byId('musicGlyph').textContent=playing?'Ⅱ':'♪';
+}
+
+async function playBackgroundMusic(){
+  if(!backgroundAudio || !musicWanted || videoIsPlaying) return;
+  try{
+    await backgroundAudio.play();
+  }catch(e){
+    // Browsers may block audible autoplay until the visitor interacts with the page.
+  }
+  updateMusicControl();
+}
+
+function pauseBackgroundMusic(){
+  if(backgroundAudio && !backgroundAudio.paused) backgroundAudio.pause();
+  updateMusicControl();
+}
+
+function setupBackgroundMusic(d){
+  const enabled=d.background_music_enabled!==false;
+  if(!enabled || !d.background_music) return;
+
+  backgroundAudio=new Audio(d.background_music);
+  backgroundAudio.loop=true;
+  backgroundAudio.preload='auto';
+  const volume=Math.max(0,Math.min(100,Number(d.background_music_volume ?? 18)));
+  backgroundAudio.volume=volume/100;
+  musicWanted=true;
+
+  const control=byId('musicControl');
+  control.style.display='inline-flex';
+  updateMusicControl();
+
+  control.addEventListener('click',async()=>{
+    if(backgroundAudio.paused){
+      musicWanted=true;
+      await playBackgroundMusic();
+    }else{
+      musicWanted=false;
+      pauseBackgroundMusic();
+    }
+  });
+
+  // Try immediately on browsers that permit it.
+  playBackgroundMusic();
+
+  // On mobile/iOS, audible autoplay usually needs a user gesture.
+  // The first normal interaction with the page unlocks the instrumental.
+  const unlock=()=>{
+    playBackgroundMusic();
+    window.removeEventListener('pointerdown',unlock);
+    window.removeEventListener('keydown',unlock);
+  };
+  window.addEventListener('pointerdown',unlock,{once:true});
+  window.addEventListener('keydown',unlock,{once:true});
+}
+
+function onYouTubeStateChange(event){
+  if(!window.YT) return;
+  if(event.data===YT.PlayerState.PLAYING){
+    videoIsPlaying=true;
+    pauseBackgroundMusic();
+  }else if(event.data===YT.PlayerState.PAUSED || event.data===YT.PlayerState.ENDED){
+    videoIsPlaying=false;
+    if(musicWanted) playBackgroundMusic();
+  }
+}
+
+function attachYouTubePlayer(){
+  if(!window.YT || !YT.Player || !byId('youtubePlayer') || youtubePlayer) return;
+  youtubePlayer=new YT.Player('youtubePlayer',{
+    events:{onStateChange:onYouTubeStateChange}
+  });
+}
+
+function requestYouTubeApi(){
+  if(youtubeApiRequested) return;
+  youtubeApiRequested=true;
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+}
+
+window.onYouTubeIframeAPIReady=attachYouTubePlayer;
 
 async function load(){
   const d=await fetch('/content/site.json',{cache:'no-store'}).then(r=>r.json());
@@ -667,10 +812,20 @@ async function load(){
       .map(x=>'<div class="ph"><img src="'+x+'" alt="Speed the Light mission project"></div>')
       .join('');
   }
+
   if(d.video_url){
-    const u=normalizeVideoUrl(d.video_url);
-    byId('videoBox').innerHTML='<iframe src="'+u+'" title="What is Speed the Light?" allowfullscreen></iframe>';
+    const youtubeId=getYouTubeId(d.video_url);
+    if(youtubeId){
+      const origin=encodeURIComponent(window.location.origin);
+      byId('videoBox').innerHTML='<iframe id="youtubePlayer" src="https://www.youtube.com/embed/'+youtubeId+'?enablejsapi=1&playsinline=1&origin='+origin+'" title="What is Speed the Light?" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      requestYouTubeApi();
+      if(window.YT && YT.Player) attachYouTubePlayer();
+    }else{
+      byId('videoBox').innerHTML='<iframe src="'+d.video_url+'" title="What is Speed the Light?" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    }
   }
+
+  setupBackgroundMusic(d);
 }
 
 load();
