@@ -101,9 +101,18 @@ a{text-decoration:none;color:inherit}
   position:absolute;
   inset:0;
   z-index:-1;
+  transition:background .25s ease;
+}
+/* CMS-selectable permanent hero tints */
+.heroPoster.tint-light .heroOverlay{
   background:
-    linear-gradient(to bottom,rgba(7,4,20,.28),rgba(8,4,24,.56)),
-    radial-gradient(circle at center,rgba(0,0,0,.02),rgba(0,0,0,.22));
+    linear-gradient(to bottom,rgba(8,6,20,.28),rgba(8,6,20,.42)),
+    radial-gradient(circle at center,rgba(0,0,0,.04),rgba(0,0,0,.18));
+}
+.heroPoster.tint-strong .heroOverlay{
+  background:
+    linear-gradient(to bottom,rgba(8,6,20,.36),rgba(8,6,20,.52)),
+    radial-gradient(circle at center,rgba(0,0,0,.06),rgba(0,0,0,.22));
 }
 .heroPosterInner{
   width:100%;
@@ -362,7 +371,7 @@ h2{
   </div>
 </div>
 
-<header class="heroPoster" id="heroPoster">
+<header class="heroPoster tint-light" id="heroPoster">
   <div class="heroScene" id="heroScene"></div>
   <div class="heroFlag"></div>
   <div class="heroOverlay"></div>
@@ -597,9 +606,14 @@ async function load(){
   setupReadMore('aboutReadBlock','aboutPreview','aboutFull','aboutToggle',d.about_text||'');
   setupReadMore('directorReadBlock','directorPreview','directorFull','directorToggle',d.director_bio||'');
 
+  const hero=byId('heroPoster');
+  const tint=d.hero_tint_style==='strong'?'strong':'light';
+  hero.classList.remove('tint-light','tint-strong');
+  hero.classList.add('tint-'+tint);
+
   if(d.hero_image){
     byId('heroScene').style.backgroundImage='url("'+d.hero_image.replace(/"/g,'')+'")';
-    byId('heroPoster').classList.add('hasImage');
+    hero.classList.add('hasImage');
   }
 
   const target=Math.max(0,Number(d.fundraising_target)||0);
