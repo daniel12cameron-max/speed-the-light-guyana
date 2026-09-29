@@ -2,7 +2,7 @@ media:
   input: media
   output: /media
   rename: safe
-  categories: [image]
+  categories: [image, audio]
 
 content:
   - name: site
@@ -69,6 +69,26 @@ content:
       - { name: giving_text, label: Other ways to give, type: text }
 
       - { name: video_url, label: Opening video URL, type: string }
+
+      - name: background_music_enabled
+        label: Background instrumental enabled
+        type: boolean
+        description: Turn the background instrumental on or off for this page.
+      - name: background_music
+        label: Background instrumental
+        type: file
+        description: Upload an instrumental you own or are licensed to use. It will loop quietly while visitors browse and pause automatically when the embedded video plays.
+        options:
+          categories: [audio]
+          extensions: [mp3, m4a, aac, wav, ogg]
+          rename: safe
+      - name: background_music_volume
+        label: Background instrumental volume
+        type: number
+        description: Volume from 0 to 100. Around 15–25 is recommended for background music.
+        options:
+          min: 0
+          max: 100
 
       - name: logo_image
         label: Speed the Light logo
