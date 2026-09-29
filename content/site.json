@@ -34,5 +34,8 @@
   ],
   "whatsapp_channel_url": "https://whatsapp.com/channel/0029VbB3CojHAdNbgXn7vK3n",
   "facebook_url": "https://www.facebook.com/profile.php?id=100068803160854&locale=it_IT#",
-  "instagram_url": "https://www.instagram.com/aognym.gy/"
+  "instagram_url": "https://www.instagram.com/aognym.gy/",
+  "background_music": "",
+  "background_music_volume": 18,
+  "background_music_enabled": true
 }
