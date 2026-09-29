@@ -24,6 +24,16 @@ content:
           categories: [image]
           extensions: [png, jpg, jpeg, webp]
           rename: safe
+      - name: hero_tint_style
+        label: Hero image tint
+        type: select
+        description: Choose how dark the permanent overlay should be so the hero text stays readable.
+        options:
+          values:
+            - name: light
+              label: Light dark tint
+            - name: strong
+              label: Stronger dark tint
 
       - { name: about_title, label: About heading, type: string }
       - { name: about_text, label: What is Speed the Light?, type: text }
