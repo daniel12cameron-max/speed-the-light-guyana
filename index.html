@@ -27,7 +27,18 @@ a{text-decoration:none;color:inherit}
 
 /* AOG NYM identity bar */
 .top{background:#12091b;color:#fff;padding:10px 0}
-.top .wrap{display:flex;align-items:center;gap:12px}
+.top .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px
+}
+.topIdentity{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0
+}
 .nymLogo{
   width:50px;height:50px;border-radius:50%;border:0;
   background:transparent;display:grid;place-items:center;overflow:hidden;flex:0 0 auto
@@ -37,6 +48,34 @@ a{text-decoration:none;color:inherit}
   font-size:.56rem;font-weight:900;line-height:1.05;text-align:center;color:#fff;padding:4px
 }
 #org{font-size:.98rem;line-height:1.25}
+.yearTheme{
+  margin-left:auto;
+  text-align:right;
+  max-width:420px;
+  line-height:1.2
+}
+.yearThemeLabel{
+  display:block;
+  margin-bottom:3px;
+  color:#cfc6df;
+  font-size:.66rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase
+}
+.yearThemeTitle{
+  display:block;
+  color:#fff;
+  font-size:.94rem;
+  font-weight:900
+}
+.yearThemeRef{
+  display:block;
+  margin-top:3px;
+  color:var(--gold);
+  font-size:.76rem;
+  font-weight:800
+}
 
 /* Main navigation */
 .nav{
@@ -420,6 +459,19 @@ h2{
   .top{padding:8px 0}
   .nymLogo{width:42px;height:42px;border-radius:50%}
   #org{font-size:.82rem;line-height:1.25}
+  .top .wrap{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:8px
+  }
+  .yearTheme{
+    margin-left:50px;
+    text-align:left;
+    max-width:calc(100% - 50px)
+  }
+  .yearThemeLabel{font-size:.58rem}
+  .yearThemeTitle{font-size:.82rem}
+  .yearThemeRef{font-size:.7rem}
   .nav .wrap{min-height:62px;gap:10px}
   .navStlLogo{width:34px;height:34px;border-radius:9px}
   .navTitle{font-size:.9rem}
@@ -534,10 +586,18 @@ h2{
 
 <div class="top">
   <div class="wrap">
-    <div class="nymLogo" id="nymLogoBox">
-      <div class="nymPlaceholder">AOG<br>NYM<br>LOGO</div>
+    <div class="topIdentity">
+      <div class="nymLogo" id="nymLogoBox">
+        <div class="nymPlaceholder">AOG<br>NYM<br>LOGO</div>
+      </div>
+      <div id="org"></div>
     </div>
-    <div id="org"></div>
+
+    <div class="yearTheme" id="yearThemeBlock">
+      <span class="yearThemeLabel">Theme for the Year</span>
+      <span class="yearThemeTitle" id="yearTheme"></span>
+      <span class="yearThemeRef" id="yearThemeReference"></span>
+    </div>
   </div>
 </div>
 
@@ -959,6 +1019,11 @@ async function load(){
   set('org',d.org);
   set('footerOrg',d.org);
   set('year',d.year);
+  set('yearTheme',d.year_theme);
+  set('yearThemeReference',d.year_theme_reference);
+  if(!d.year_theme && !d.year_theme_reference){
+    byId('yearThemeBlock').style.display='none';
+  }
   set('heroYear',d.year);
   set('kicker',d.kicker);
   set('heroText',d.hero_text);
