@@ -21,6 +21,9 @@
   "treasurer": "Rev. Akini Cummings",
   "giving_text": "You may also give through your local YM President , Youth Pastor or Sectional Representative or drop off funds at the Assemblies of God Head Office, Lance & Gibbs Street, Queenstown, Georgetown, Guyana.",
   "video_url": "https://youtu.be/dSU-e-vPNyQ?si=U22h25BiZqlV9BXr",
+  "background_music_enabled": true,
+  "background_music": "/media/maverick-city-i-thank-god-instrumental-with-lyrics-shortened-version-2.mp3",
+  "background_music_volume": 18,
   "logo_image": "/media/chatgpt-image-sep-28-2026-112028-am.png",
   "nym_logo_image": "/media/chatgpt-image-sep-29-2026-025856-pm.png",
   "director_image": "/media/whatsapp-image-2026-07-02-at-143952-5.jpeg",
@@ -34,8 +37,5 @@
   ],
   "whatsapp_channel_url": "https://whatsapp.com/channel/0029VbB3CojHAdNbgXn7vK3n",
   "facebook_url": "https://www.facebook.com/profile.php?id=100068803160854&locale=it_IT#",
-  "instagram_url": "https://www.instagram.com/aognym.gy/",
-  "background_music": "",
-  "background_music_volume": 18,
-  "background_music_enabled": true
+  "instagram_url": "https://www.instagram.com/aognym.gy/"
 }
