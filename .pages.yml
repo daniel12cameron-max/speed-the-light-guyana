@@ -14,6 +14,14 @@ content:
       - { name: org, label: Organisation, type: string }
       - { name: campaign, label: Campaign name, type: string }
       - { name: year, label: Year, type: string }
+      - name: year_theme
+        label: NYM Theme for the Year
+        type: string
+        description: The annual National Youth Ministries theme shown in the top identity bar.
+      - name: year_theme_reference
+        label: Theme Scripture Reference
+        type: string
+        description: Example: John 10:10 · NKJV
       - { name: kicker, label: Hero kicker, type: string }
       - { name: hero_text, label: Hero text, type: text }
       - name: hero_image
